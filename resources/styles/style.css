@@ -1,0 +1,120 @@
+body {
+  /* border: 1px solid black; */
+  margin: 0;
+  padding: 0;
+  width: auto;
+  height: auto;
+  font-family: sans-serif;
+}
+
+/* Game container
+
+*/
+.game-container {
+  /* background-color: rgb(149, 149, 255); */
+  margin: 1.5em;
+  height: 95vh;
+  width: 95vw;
+  display: grid;
+  gap: 0.5em;
+  grid-template-columns: 30% 1fr;
+  grid-template-rows: 20% 1fr 10%;
+  grid-template-areas:
+    'heading heading'
+    'sidebar game-board'
+    'footer footer';
+}
+/* Game title 
+
+*/
+.game-title {
+  background-color: rgb(120, 120, 255);
+  align-items: center;
+  border-radius: 2rem 2rem 0 0;
+  border: 3px solid rgb(0, 0, 0);
+  align-self: center;
+  display: grid;
+  text-align: center;
+  grid-area: heading;
+  font-size: 4rem;
+  height: 100%;
+}
+/* Sidebar elements start here
+
+*/
+.sidebar {
+  grid-area: sidebar;
+  height: auto;
+  width: auto;
+  background-color: brown;
+}
+
+/* Gameboard elements start here
+
+*/
+.gameboard {
+  display: grid;
+  position: relative;
+  grid-area: game-board;
+  height: auto;
+  width: auto;
+  justify-content: center;
+  grid-template-rows: 15% 1fr;
+  background-color: chartreuse;
+  grid-template-areas:
+    'player-turn'
+    'grid-board';
+}
+
+.player-turn {
+  font-size: 2rem;
+  align-self: center;
+  text-align: center;
+  grid-area: player-turn;
+}
+
+.grid-container {
+  justify-content: center;
+  height: 25em;
+  width: 25em;
+  justify-content: center;
+  background-color: white;
+  grid-area: grid-board;
+  position: relative;
+}
+.gameboard-img {
+  display: grid;
+  position: relative;
+}
+.grids {
+  cursor: pointer;
+  display: grid;
+  gap: 0.5rem;
+  position: absolute;
+  background-color: aqua;
+  display: grid;
+  height: 100%;
+  width: 100%;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: repeat(auto-fit, 1fr);
+}
+.grid-square {
+  /* border: 1px solid black; */
+  display: grid;
+  justify-content: center;
+  align-self: center;
+  font-size: 7rem;
+  z-index: 3;
+  height: 100%;
+  width: 100%;
+}
+
+/* Footer elements start here
+
+*/
+.footer {
+  grid-area: footer;
+  height: auto;
+  width: auto;
+  background-color: bisque;
+}

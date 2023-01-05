@@ -8,5 +8,59 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Tic-Tac-Toe</title>
   </head>
-  <body></body>
+  <body>
+    <!-- Game container starts here
+    
+    -->
+    <div class="game-container">
+      <!-- Game Title
+       -->
+      <h1 class="game-title">TIC-TAC-TOE</h1>
+      <!-- Sidebar container starts here
+      
+      -->
+      <div class="sidebar">
+        <h2 class="sidabar-heading">Choose Your Players</h3>
+        <div class="player-v-player">
+          <h3 class="sidbar-heading2">Player vs. Player</h3>
+          <button class="sidebar-btn" id="pvp">PVP</button>
+        </div>
+        <div class="pvc">
+          <h3 class="sidebar-heading2">Player vs. AI</h3>
+          <button class="sidebar-btn" id="pvc">AI</button>
+        </div>
+        <div class="options-container">
+        <h2 class="options-heading">Options</h2>
+        <button class="sidebar-btn" id="reset">Reset</button>
+      </div>
+      </div>
+
+      <!-- Gameboard container starts here
+      
+      -->
+      <div class="gameboard">
+        <h3 class="player-turn">Player 1</h3>
+        <!--This options must be set to blank, will be used to show whos turn it is-->
+
+        <div class="grid-container">
+          <div class="grids">
+            <div class="grid-square">X</div>
+            <div class="grid-square">X</div>
+            <div class="grid-square">X</div>
+            <div class="grid-square">X</div>
+            <div class="grid-square">X</div>
+            <div class="grid-square">O</div>
+            <div class="grid-square">X</div>
+            <div class="grid-square">X</div>
+            <div class="grid-square">X</div>
+          </div>
+          <img class="gameboard-img" src="resources/images/gameboard.svg" />
+        </div>
+      </div>
+      <!-- Footer container starts here
+      
+      -->
+      <div class="footer"></div>
+    </div>
+  </body>
 </html>
