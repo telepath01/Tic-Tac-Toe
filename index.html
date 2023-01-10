@@ -9,11 +9,51 @@
     <title>Tic-Tac-Toe</title>
   </head>
   <body>
+    <!-- Game-container 
+    
+    -->
     <div class="game-container">
-      Game-container
-      <div class="heading-container">Heading-container</div>
-      <div class="sidebar-container">Sidebar-container</div>
-      <div class="gameboard-container">Gameboard-container</div>
+      <!-- Heading -->
+      <div class="heading-container">
+        <h1 class="title">Tic-Tac-Toe</h1>
+      </div>
+      <!-- Sidebar -->
+      <div class="sidebar-container">
+        <div class="sidebar-heading">
+          <h3 class="sidebar-title">Player Select</h3>
+        </div>
+        <div class="pvp-container">
+          <h4 class="select-title">Player vs. Player</h4>
+          <button type="button" class="pvp-btn">PVP</button>
+        </div>
+        <div class="pvc-container">
+          <h4 class="select-title">Player vs. Computer</h4>
+          <button type="button" class="pvc-btn">PVC</button>
+        </div>
+      </div>
+      <!-- Gameboard -->
+      <div class="gameboard-container">
+        <div class="player-title">
+          <h2 class="player-turn">Player 1</h2>
+        </div>
+        <div class="gameboard">
+          <div class="img-container">
+            <img class="board-img" src="resources/images/gameboard.svg" />
+            <div class="card-container">
+              <div class="position-card" id="pos1"></div>
+              <div class="position-card" id="pos2"></div>
+              <div class="position-card" id="pos3"></div>
+              <div class="position-card" id="pos4"></div>
+              <div class="position-card" id="pos5"></div>
+              <div class="position-card" id="pos6"></div>
+              <div class="position-card" id="pos7"></div>
+              <div class="position-card" id="pos8"></div>
+              <div class="position-card" id="pos9"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Footer -->
       <div class="footer-container">Footer-container</div>
     </div>
   </body>
