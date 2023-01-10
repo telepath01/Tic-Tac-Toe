@@ -5,6 +5,18 @@ const Player = (name) => {
   return { playerName };
 };
 
+const GameSetUp = (function () {
+  const elementCreator = function () {
+    const playerTurn = document.querySelector('.player-turn');
+    const pvpButton = document.querySelector('.pvp-btn');
+    const pvcButton = document.querySelector('.pvc-btn');
+    const board = document.querySelectorAll('.position-card');
+    return { playerTurn, pvpButton, pvcButton, board };
+  };
+  return { elementCreator };
+})();
+GameSetUp.elementCreator();
+
 const GameFlow = (function () {
   const playerObject = [];
   const playerTurn = GameSetUp.elementCreator().playerTurn;
@@ -17,7 +29,17 @@ const GameFlow = (function () {
 
   const gameCreate = function () {
     pvpButton.addEventListener('click', () => {
-      console.log('working');
+      if (!playersActive) {
+        playerVsPlayer();
+        playersActive = true;
+      } else return;
+    });
+
+    pvcButton.addEventListener('click', () => {
+      if (!playersActive) {
+        playerVsComputer();
+        playersActive = true;
+      }
     });
   };
 
@@ -33,16 +55,4 @@ const GameFlow = (function () {
   };
   return { gameCreate };
 })();
-
-const GameSetUp = (function () {
-  const elementCreator = function () {
-    const playerTurn = document.querySelector('.player-turn');
-    const pvpButton = document.querySelector('.pvp-btn');
-    const pvcButton = document.querySelector('.pvc-btn');
-    const board = document.querySelectorAll('.position-card');
-    return { playerTurn, pvpButton, pvcButton, board };
-  };
-  return { elementCreator };
-})();
-GameSetUp.elementCreator();
 GameFlow.gameCreate();
