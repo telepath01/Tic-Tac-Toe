@@ -21,10 +21,17 @@ GameSetUp.elementCreator();
 const GameFlow = (function () {
   const playerObject = [];
   const winCondition = [
-    [1, 2, 3][(4, 5, 6)][(7, 8, 9)][(1, 4, 7)][(2, 5, 8)][(3, 6, 9)][(1, 5, 9)][
-      (3, 5, 7)
-    ],
+    ['pos1', 'pos2', 'pos3'],
+    ['pos4', 'pos5', 'pos6'],
+    ['pos7', 'pos8', 'pos9'],
+    ['pos1', 'pos4', 'pos7'],
+    ['pos2', 'pos5', 'pos8'],
+    ['pos3', 'pos6', 'pos9'],
+    ['pos1', 'pos5', 'pos9'],
+    ['pos3', 'pos5', 'pos7'],
   ];
+  const player1Choices = [];
+  const player2Choices = [];
   const playerTurn = GameSetUp.elementCreator().playerTurn;
   const pvpButton = GameSetUp.elementCreator().pvpButton;
   const pvcButton = GameSetUp.elementCreator().pvcButton;
@@ -57,11 +64,14 @@ const GameFlow = (function () {
     board.forEach((cell) => {
       cell.addEventListener('click', (element) => {
         if (currentTurn === playerObject[0]) {
+          gridSelection(element, player1Choices);
           element.target.textContent = playerObject[0].mark;
           currentTurn = playerObject[1];
+          winCheck(winCondition, player1Choices);
           turn();
         } else if (currentTurn === playerObject[1]) {
           element.target.textContent = playerObject[1].mark;
+          gridSelection(element, player2Choices);
           currentTurn = playerObject[0];
           turn();
         }
@@ -91,6 +101,14 @@ const GameFlow = (function () {
     } else if (currentTurn === '') {
       playerTurn.textContent = `${playerObject[0]['player1']['playerName']}'s Turn`;
     }
+  };
+
+  const gridSelection = function (index, player) {
+    player.push(index.target.id);
+  };
+
+  const winCheck = function (winCondition, player) {
+    
   };
   return { gameCreate };
 })();
