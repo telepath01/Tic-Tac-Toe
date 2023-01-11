@@ -146,6 +146,9 @@ const GameFlow = (function () {
     resetButton.addEventListener('click', () => {
       delete playerObject[0];
       delete playerObject[1];
+      playerObject = playerObject.filter((_, index) =>
+        playerObject.hasOwnProperty(index)
+      );
       player1Choices = [''];
       player2Choices = [''];
       playersActive = false;

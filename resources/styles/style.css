@@ -9,6 +9,31 @@ body {
   height: auto;
   width: auto;
 }
+
+/* Modal win scrren
+
+*/
+.screen-main {
+  background-color: rgba(73, 73, 73, 0.466);
+  display: block;
+  justify-content: center;
+  position: absolute;
+  margin: auto;
+  backdrop-filter: blur(2px);
+  height: 100%;
+  width: 100%;
+}
+.screen-container {
+  display: block;
+  margin: auto;
+  margin-top: 8em;
+  background-color: #ff6e31;
+  justify-content: center;
+  border-radius: 2rem;
+  border: 4px solid black;
+  width: 60em;
+  height: 40em;
+}
 /* Gamae container start
 
 */
@@ -16,6 +41,7 @@ body {
   margin: 1rem;
 
   border: 1px solid black;
+  /* This is a place holder until modal is complete change back to grid when complete */
   display: grid;
 
   height: 90vh;
