@@ -11,7 +11,8 @@ const GameSetUp = (function () {
     const pvpButton = document.querySelector('.pvp-btn');
     const pvcButton = document.querySelector('.pvc-btn');
     const board = document.querySelectorAll('.position-card');
-    return { playerTurn, pvpButton, pvcButton, board };
+    const resetButton = document.querySelector('.reset-btn');
+    return { playerTurn, pvpButton, pvcButton, board, resetButton };
   };
 
   return { elementCreator };
@@ -19,7 +20,7 @@ const GameSetUp = (function () {
 GameSetUp.elementCreator();
 
 const GameFlow = (function () {
-  const playerObject = [];
+  let playerObject = [];
   const winCondition = [
     ['pos1', 'pos2', 'pos3'],
     ['pos4', 'pos5', 'pos6'],
@@ -30,14 +31,18 @@ const GameFlow = (function () {
     ['pos1', 'pos5', 'pos9'],
     ['pos3', 'pos5', 'pos7'],
   ];
-  const player1Choices = [];
-  const player2Choices = [];
+  let player1Choices = [];
+  let player2Choices = [];
   const playerTurn = GameSetUp.elementCreator().playerTurn;
   const pvpButton = GameSetUp.elementCreator().pvpButton;
   const pvcButton = GameSetUp.elementCreator().pvcButton;
   const board = GameSetUp.elementCreator().board;
+  const resetButton = GameSetUp.elementCreator().resetButton;
   let playersActive = false;
   let currentTurn;
+  let gamewin = false;
+  let player1;
+  let player2;
 
   const gameCreate = function () {
     pvpButton.addEventListener('click', () => {
@@ -63,31 +68,46 @@ const GameFlow = (function () {
   const onTurns = function () {
     board.forEach((cell) => {
       cell.addEventListener('click', (element) => {
-        if (currentTurn === playerObject[0]) {
-          gridSelection(element, player1Choices);
-          element.target.textContent = playerObject[0].mark;
-          currentTurn = playerObject[1];
-          winCheck(winCondition, player1Choices);
-          turn();
-        } else if (currentTurn === playerObject[1]) {
-          element.target.textContent = playerObject[1].mark;
-          gridSelection(element, player2Choices);
-          currentTurn = playerObject[0];
-          turn();
-        }
+        if (!gamewin) {
+          if (currentTurn === playerObject[0]) {
+            gridSelection(element, player1Choices);
+            element.target.textContent = playerObject[0].mark;
+            currentTurn = playerObject[1];
+            winCheck(
+              winCondition,
+              player1Choices,
+              playerObject[0]['player1']['playerName']
+            );
+            if (!gamewin) {
+              turn();
+            } else return;
+          } else if (currentTurn === playerObject[1]) {
+            element.target.textContent = playerObject[1].mark;
+            gridSelection(element, player2Choices);
+            currentTurn = playerObject[0];
+            winCheck(
+              winCondition,
+              player2Choices,
+              playerObject[1]['player2']['playerName']
+            );
+            if (!gamewin) {
+              turn();
+            } else return;
+          }
+        } else return;
       });
     });
   };
 
   const playerVsComputer = function () {
-    const player1 = Player(prompt('Player 1 Name:'));
-    const player2 = Player('Computer');
+    player1 = Player(prompt('Player 1 Name:'));
+    player2 = Player('Computer');
     playerObject.push({ player1, mark: 'X' }, { player2, mark: 'O' });
     return { player1, player2 };
   };
   const playerVsPlayer = function () {
-    const player1 = Player(prompt('Player 1 Name:'));
-    const player2 = Player(prompt('Player 2 Name:'));
+    player1 = Player(prompt('Player 1 Name:'));
+    player2 = Player(prompt('Player 2 Name:'));
     playerObject.push({ player1, mark: 'X' }, { player2, mark: 'O' });
     return { player1, player2 };
   };
@@ -107,9 +127,37 @@ const GameFlow = (function () {
     player.push(index.target.id);
   };
 
-  const winCheck = function (winCondition, player) {
-    
+  const winCheck = function (winCondition, player, playerName) {
+    if (!gamewin) {
+      winCondition.some((combination) => {
+        if (
+          combination[0] === player[0] &&
+          combination[1] === player[1] &&
+          combination[2] === player[2]
+        ) {
+          playerTurn.textContent = `${playerName} wins the game`;
+          gamewin = true;
+        } else return;
+      });
+    } else return;
   };
-  return { gameCreate };
+
+  const resetGame = function () {
+    resetButton.addEventListener('click', () => {
+      delete playerObject[0];
+      delete playerObject[1];
+      player1Choices = [''];
+      player2Choices = [''];
+      playersActive = false;
+      currentTurn = playerObject[0];
+      gamewin = false;
+      playerTurn.textContent = 'Player 1';
+      board.forEach((element) => {
+        element.textContent = '';
+      });
+    });
+  };
+  return { gameCreate, resetGame };
 })();
 GameFlow.gameCreate();
+GameFlow.resetGame();

@@ -19,7 +19,7 @@ body {
   display: grid;
 
   height: 90vh;
-  width: 95vw;
+  width: 70vw;
   grid-template-columns: 15% 85%;
   grid-template-rows: 15% 70% 15%;
   grid-template-areas:
@@ -109,6 +109,7 @@ body {
 }
 .gameboard {
   display: grid;
+
   align-self: center;
   align-items: center;
   grid-area: gameboard;
@@ -144,6 +145,20 @@ body {
 
 */
 .footer-container {
+  display: grid;
+  justify-content: center;
+  align-items: center;
   background-color: #ad8e70;
   grid-area: footer;
+}
+.reset-btn {
+  background-color: #243763;
+  font-weight: bold;
+  font-size: 1.5rem;
+  padding: 0 1rem 0 1rem;
+  height: 3rem;
+  width: auto;
+  color: white;
+  border: none;
+  border-radius: 2rem;
 }
