@@ -12,7 +12,19 @@ const GameSetUp = (function () {
     const pvcButton = document.querySelector('.pvc-btn');
     const board = document.querySelectorAll('.position-card');
     const resetButton = document.querySelector('.reset-btn');
-    return { playerTurn, pvpButton, pvcButton, board, resetButton };
+    const modalReset = document.querySelector('.reset');
+    const modalPopUp = document.querySelector('.screen-main');
+    const modalName = document.querySelector('.p-name');
+    return {
+      playerTurn,
+      pvpButton,
+      pvcButton,
+      board,
+      resetButton,
+      modalReset,
+      modalPopUp,
+      modalName,
+    };
   };
 
   return { elementCreator };
@@ -38,6 +50,9 @@ const GameFlow = (function () {
   const pvcButton = GameSetUp.elementCreator().pvcButton;
   const board = GameSetUp.elementCreator().board;
   const resetButton = GameSetUp.elementCreator().resetButton;
+  const modalReset = GameSetUp.elementCreator().modalReset;
+  const modalPopUp = GameSetUp.elementCreator().modalPopUp;
+  const modalName = GameSetUp.elementCreator().modalName;
   let playersActive = false;
   let currentTurn;
   let gamewin = false;
@@ -135,6 +150,7 @@ const GameFlow = (function () {
           combination[1] === player[1] &&
           combination[2] === player[2]
         ) {
+          modalShow(playerName);
           playerTurn.textContent = `${playerName} wins the game`;
           gamewin = true;
         } else return;
@@ -157,6 +173,29 @@ const GameFlow = (function () {
       playerTurn.textContent = 'Player 1';
       board.forEach((element) => {
         element.textContent = '';
+        modalPopUp.style.display = 'none';
+      });
+    });
+  };
+
+  const modalShow = function (playerName) {
+    modalPopUp.style.display = 'block';
+    modalName.textContent = playerName;
+    modalReset.addEventListener('click', function () {
+      delete playerObject[0];
+      delete playerObject[1];
+      playerObject = playerObject.filter((_, index) =>
+        playerObject.hasOwnProperty(index)
+      );
+      player1Choices = [''];
+      player2Choices = [''];
+      playersActive = false;
+      currentTurn = playerObject[0];
+      gamewin = false;
+      playerTurn.textContent = 'Player 1';
+      board.forEach((element) => {
+        element.textContent = '';
+        modalPopUp.style.display = 'none';
       });
     });
   };
